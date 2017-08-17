@@ -1,8 +1,10 @@
 FROM centos:centos7
 
 RUN groupadd -r mysql && useradd -r -g mysql mysql
+RUN yum install -y wget
+RUN wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+RUN rpm -ivh mysql-community-release-el7-5.noarch.rpm
 RUN yum install -y mysql-server 
-RUN yum install update -y
 ADD my.cnf /etc/mysql/conf.d/my.cnf 
 ADD run /usr/local/bin/run
 RUN chmod +x /usr/local/bin/run
